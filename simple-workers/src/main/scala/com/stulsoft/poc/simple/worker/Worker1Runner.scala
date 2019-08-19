@@ -4,7 +4,7 @@
 
 package com.stulsoft.poc.simple.worker
 
-import com.netflix.conductor.client.http.TaskClient
+import com.netflix.conductor.client.http.{TaskClient, WorkflowClient}
 import com.netflix.conductor.client.task.WorkflowTaskCoordinator
 import com.typesafe.scalalogging.LazyLogging
 
@@ -32,6 +32,9 @@ object Worker1Runner extends LazyLogging {
 
     //Start for polling and execution of the tasks
     coordinator.init()
+
+//    val wfc = new WorkflowClient()
+//    wfc.getWorkflow("jjjj",false).getOutput.get("resultData")
 
   }
 }
