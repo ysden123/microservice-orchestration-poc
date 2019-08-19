@@ -4,8 +4,8 @@
 
 package com.stulsoft.poc.simple.worker
 
-import com.netflix.conductor.client.http.TaskClient
-import com.netflix.conductor.client.task.WorkflowTaskCoordinator
+import java.util
+
 import com.netflix.conductor.client.worker.Worker
 import com.netflix.conductor.common.metadata.tasks.TaskResult.Status
 import com.netflix.conductor.common.metadata.tasks.{Task, TaskResult}
@@ -18,12 +18,23 @@ class Worker1(taskDefName: String) extends Worker with LazyLogging {
   override def getTaskDefName: String = taskDefName
 
   override def execute(task: Task): TaskResult = {
-    logger.info(s"Executing task: $task")
+    //    logger.info(s"Executing task: $task")
+
+    logger.debug(s"task.getInputData: ${task.getInputData}")
+    task.getInputData.forEach((k, v) => logger.info(s"Key: $k, Value: $v"))
+    val eventData: java.util.Map[String, Any] = task.getInputData.get("eventData").asInstanceOf[java.util.Map[String, Any]]
+    logger.debug(s"eventData: $eventData")
+    eventData.forEach((k, v) => logger.debug(s"$k -> $v"))
+
     val result = new TaskResult(task)
     result.setStatus(Status.COMPLETED)
 
-    //Register the output of the task//Register the output of the task
-    result.getOutputData.put("outputKey1", "value")
+    //Register the output of the task
+    val resultData = new util.HashMap[String, Any]()
+    resultData.put("state", "the state value")
+    resultData.put("skipped", "no")
+    resultData.put("result", "the result")
+    result.getOutputData.put("resultData", resultData)
     result
   }
 }
