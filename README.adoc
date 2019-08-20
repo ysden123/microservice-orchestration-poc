@@ -1,0 +1,10 @@
+= netflix-conductor-poc
+Playing with Netflix Conductor
+
+== simple-workers
+Example codes:
+ - worker
+ - programmatic task and workflow definitions
+ - running workflow
+
+See link:simple-workers/README.adoc[simple-workers]
