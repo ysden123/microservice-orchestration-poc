@@ -18,3 +18,9 @@ Worker - link:src/main/scala/com/stulsoft/poc/simple/worker/Worker1.scala[Worker
 1. Send POST request with link:/src/main/resources/workflowdefinition.json[workflowdefinition.json]
 1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner] to register a worker
 1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[WorkflowRunner] to start the workflow and to get a result
+
+=== Running flow III
+1. Start conductor
+1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/TaskDefinitionCreator.scala[TaskDefinitionCreator] to register a task and workflow
+1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner] to register a worker
+1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[WorkflowRunner] to start the workflow and to get a result

@@ -8,7 +8,8 @@ import com.netflix.conductor.client.http.{TaskClient, WorkflowClient}
 import com.netflix.conductor.client.task.WorkflowTaskCoordinator
 import com.typesafe.scalalogging.LazyLogging
 
-/**
+/** Initializes a worker, registers worker for execution
+ *
  * @author Yuriy Stul
  */
 object Worker1Runner extends LazyLogging {
@@ -18,13 +19,13 @@ object Worker1Runner extends LazyLogging {
     taskClient.setRootURI("http://localhost:8080/api/")
     val threadCount = 2
     val worker1 = new Worker1("task_1")
-//    val worker2 = new Worker1("task_2")
-//    val worker3 = new Worker1("task_3")
+    //    val worker2 = new Worker1("task_2")
+    //    val worker3 = new Worker1("task_3")
 
     // Create workflow coordinator
     val builder = new WorkflowTaskCoordinator.Builder
     val coordinator = builder
-//      .withWorkers(worker1, worker2, worker3)
+      //      .withWorkers(worker1, worker2, worker3)
       .withWorkers(worker1)
       .withThreadCount(threadCount)
       .withTaskClient(taskClient)
@@ -33,8 +34,8 @@ object Worker1Runner extends LazyLogging {
     //Start for polling and execution of the tasks
     coordinator.init()
 
-//    val wfc = new WorkflowClient()
-//    wfc.getWorkflow("jjjj",false).getOutput.get("resultData")
+    //    val wfc = new WorkflowClient()
+    //    wfc.getWorkflow("jjjj",false).getOutput.get("resultData")
 
   }
 }
