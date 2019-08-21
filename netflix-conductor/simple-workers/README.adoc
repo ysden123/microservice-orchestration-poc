@@ -6,7 +6,7 @@ Worker - link:src/main/scala/com/stulsoft/poc/simple/worker/Worker1.scala[Worker
 === Running flow I
 1. Start conductor
 1. Send POST request with link:/src/main/resources/taskDefinition.json[taskDefinition.json]
-1. Send POST request with link:/src/main/resources/workflowdefinition.json[workflowdefinition.json]
+1. Send POST request with link:/src/main/resources/workflowDefinition.json[workflowDefinition.json]
 1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner]
 1. Send POST request with link:/src/main/resources/startWorkflow.json[startWorkflow.json]
 1. Remember workflow ID
@@ -15,12 +15,22 @@ Worker - link:src/main/scala/com/stulsoft/poc/simple/worker/Worker1.scala[Worker
 === Running flow II
 1. Start conductor
 1. Send POST request with link:/src/main/resources/taskDefinition.json[taskDefinition.json]
-1. Send POST request with link:/src/main/resources/workflowdefinition.json[workflowdefinition.json]
+1. Send POST request with link:/src/main/resources/workflowDefinition.json[workflowDefinition.json]
 1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner] to register a worker
 1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[WorkflowRunner] to start the workflow and to get a result
 
 === Running flow III
+Task and workflow is defined programmatic:
+
 1. Start conductor
 1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/TaskDefinitionCreator.scala[TaskDefinitionCreator] to register a task and workflow
+1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner] to register a worker
+1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[WorkflowRunner] to start the workflow and to get a result
+
+=== Running flow IV
+Task and workflow is defined from JSON files:
+
+1. Start conductor
+1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/TaskDefinitionCreator2.scala[TaskDefinitionCreator2] to register a task and workflow
 1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner] to register a worker
 1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[WorkflowRunner] to start the workflow and to get a result
