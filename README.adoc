@@ -1,5 +1,5 @@
 = microservice-orchestartion-poc
-Playing with microservice orchestartion
+Playing with microservice orchestration
 
 == Netflix Conductor
 === simple-workers
