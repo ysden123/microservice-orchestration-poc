@@ -1,10 +1,11 @@
-= netflix-conductor-poc
-Playing with Netflix Conductor
+= microservice-orchestartion-poc
+Playing with microservice orchestartion
 
-== simple-workers
+== Netflix Conductor
+=== simple-workers
 Example codes:
  - worker
  - programmatic task and workflow definitions
  - running workflow
 
-See link:simple-workers/README.adoc[simple-workers]
+See link:netflix-conductor/simple-workers/README.adoc[simple-workers]
