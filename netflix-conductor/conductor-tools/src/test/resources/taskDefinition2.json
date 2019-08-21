@@ -1,0 +1,12 @@
+{
+  "inputKeys": [
+    "sourceRequestId",
+    "qcElementType"
+  ],
+  "outputKeys": [
+    "state",
+    "skipped",
+    "result"
+  ],
+  "rateLimitPerFrequency": 50
+}
