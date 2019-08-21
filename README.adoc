@@ -1,4 +1,4 @@
-= microservice-orchestartion-poc
+= microservice-orchestration-poc
 Playing with microservice orchestration
 
 == Netflix Conductor
