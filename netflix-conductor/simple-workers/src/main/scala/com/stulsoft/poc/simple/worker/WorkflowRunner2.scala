@@ -1,17 +1,22 @@
+/*
+ * Copyright (c) 2019. Yuriy Stul
+ */
+
 package com.stulsoft.poc.simple.worker
 
 import java.util
 
 import com.netflix.conductor.client.http.WorkflowClient
 import com.netflix.conductor.common.metadata.workflow.StartWorkflowRequest
+import com.netflix.conductor.common.run.Workflow
 import com.netflix.conductor.common.run.Workflow.WorkflowStatus
 import com.typesafe.scalalogging.LazyLogging
 
-/** Runs workflow, calls workflow.
+/** Runs workflow, calls workflow with polling.
  *
  * @author Yuriy Stul
  */
-object WorkflowRunner extends LazyLogging {
+object WorkflowRunner2 extends LazyLogging {
   def main(args: Array[String]): Unit = {
     logger.info("==>main")
     val workflowClient = new WorkflowClient()
@@ -23,17 +28,26 @@ object WorkflowRunner extends LazyLogging {
     eventData.put("sourceRequestId", 123)
     eventData.put("qcElementType", "big")
     startWorkflowRequest.getInput.put("eventData", eventData)
-    var now = System.currentTimeMillis()
+    val now = System.currentTimeMillis()
     val workflowId = workflowClient.startWorkflow(startWorkflowRequest)
     logger.info(s"Start workflow took ${System.currentTimeMillis() - now} ms")
 
-    Thread.sleep(5000)
-    now = System.currentTimeMillis()
-    val workFlow = workflowClient.getWorkflow(workflowId, false)
+    var pollingCounter = 10
+    var workFlow: Workflow = null
 
-    workFlow.getStatus match{
+    var workflowStatus: WorkflowStatus = null
+    do {
+      println(s"pollingCounter = $pollingCounter")
+      workFlow = workflowClient.getWorkflow(workflowId, false)
+      workflowStatus = workFlow.getStatus
+      if (workflowStatus == WorkflowStatus.RUNNING)
+        Thread.sleep(100)
+      pollingCounter -= 1
+    } while (pollingCounter > 0 && workflowStatus == WorkflowStatus.RUNNING)
+
+    workflowStatus match {
       case WorkflowStatus.COMPLETED =>
-        logger.info(s"Getting workflow result took ${System.currentTimeMillis() - now} ms")
+        logger.info(s"Response time is ${System.currentTimeMillis() - now} ms. Result:")
         workFlow
           .getOutput
           .get("resultData")

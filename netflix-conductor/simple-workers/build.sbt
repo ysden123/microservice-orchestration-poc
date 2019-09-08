@@ -8,7 +8,7 @@ lazy val loggingVersion = "2.12.0"
 lazy val json4sVersion = "3.6.7"
 lazy val scalaXmlVersion = "1.2.0"
 lazy val projectVersion = "1.0.0"
-lazy val conductorClientVersion = "2.14.5"
+lazy val conductorClientVersion = "2.15.0"
 lazy val projectName = "simple-workers"
 
 lazy val commonSettings = Seq(
