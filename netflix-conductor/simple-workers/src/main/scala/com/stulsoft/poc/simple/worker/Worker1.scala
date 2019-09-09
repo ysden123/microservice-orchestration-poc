@@ -23,18 +23,22 @@ class Worker1(taskDefName: String) extends Worker with LazyLogging {
     logger.debug(s"task.getInputData: ${task.getInputData}")
     task.getInputData.forEach((k, v) => logger.info(s"Key: $k, Value: $v"))
     val eventData: java.util.Map[String, Any] = task.getInputData.get("eventData").asInstanceOf[java.util.Map[String, Any]]
-    logger.debug(s"eventData: $eventData")
-    eventData.forEach((k, v) => logger.debug(s"$k -> $v"))
-
     val result = new TaskResult(task)
-    result.setStatus(Status.COMPLETED)
+    logger.debug(s"eventData: $eventData")
+    if (eventData != null) {
+      eventData.forEach((k, v) => logger.debug(s"$k -> $v"))
 
-    //Register the output of the task
-    val resultData = new util.HashMap[String, Any]()
-    resultData.put("state", "the state value")
-    resultData.put("skipped", "no")
-    resultData.put("result", "the result")
-    result.getOutputData.put("resultData", resultData)
+      //Register the output of the task
+      val resultData = new util.HashMap[String, Any]()
+      resultData.put("state", "the state value")
+      resultData.put("skipped", "no")
+      resultData.put("result", "the result")
+      result.getOutputData.put("resultData", resultData)
+
+      result.setStatus(Status.COMPLETED)
+    }else{
+      result.setStatus(Status.FAILED)
+    }
     result
   }
 }
