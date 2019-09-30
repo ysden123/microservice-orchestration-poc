@@ -21,9 +21,13 @@ object ApprovePayment extends App with LazyLogging {
       .brokerContactPoint(s"${AppConfig.zeebeHost}:${AppConfig.zeebePort}")
       .build()
 
+    val newData = new java.util.HashMap[String, Any]()
+    newData.put("billId", 789)
+
     zeebeClient.newPublishMessageCommand()
       .messageName("payment-approved")
       .correlationKey("123")
+      .variables(newData)
       .send()
       .join()
 

@@ -29,20 +29,11 @@ object Workers extends App with LazyLogging {
       .handler((jobClient, job) => {
         logger.info(s"$jobType1: Initiating payment ...")
         outputData(jobType1, job)
-        //
-        //        // add data
-        //        val newData = new java.util.HashMap[String, Any]()
-        //        newData.put("paymentId", 456)
-        //        newData.put("sum", 11.07)
-        //        newData.put("index", 789)
-        //        newData.put("undeclared", "some test text") // Missing in BPMN as output parameter, will be invisible in the next tasks!
-        //        jobClient.newCompleteCommand(job.getKey)
-        //          .variables(newData)
-        //          .send()
-        //          .join()
-        //      })
-        //      .open()
+
+        val newData = new java.util.HashMap[String, Any]()
+        newData.put("orderId", 123)
         jobClient.newCompleteCommand(job.getKey)
+          .variables(newData)
           .send()
           .join()
       })

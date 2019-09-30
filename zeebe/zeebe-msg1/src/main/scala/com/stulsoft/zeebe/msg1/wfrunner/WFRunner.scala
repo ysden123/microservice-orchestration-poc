@@ -22,7 +22,8 @@ object WFRunner extends App with LazyLogging {
     // create new instance of the workflow
     logger.info("Creating new instance of the workflow")
     val data = new java.util.HashMap[String, Any]()
-    data.put("orderId", 123)
+//    data.put("orderId", 123)
+    data.put("sum", 45.67)
 
     val wfInstance = zeebeClient.newCreateInstanceCommand()
       .bpmnProcessId("DemoMessageWF_ID")
