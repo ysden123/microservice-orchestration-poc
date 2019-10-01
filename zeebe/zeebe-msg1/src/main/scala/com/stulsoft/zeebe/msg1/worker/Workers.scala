@@ -52,6 +52,20 @@ object Workers extends App with LazyLogging {
           .join()
       })
       .open()
+
+    // register worker 'mark-timeout'
+    val jobType3 = "mark-timeout"
+    logger.info(s"Register $jobType3")
+    zeebeClient.newWorker()
+      .jobType(jobType3)
+      .handler((jobClient, job) => {
+        logger.info(s"$jobType3: Marking timeout ...")
+        outputData(jobType3, job)
+        jobClient.newCompleteCommand(job.getKey)
+          .send()
+          .join()
+      })
+      .open()
   } catch {
     case ex: Exception =>
       logger.error(s"Failure: ${ex.getMessage}", ex)
