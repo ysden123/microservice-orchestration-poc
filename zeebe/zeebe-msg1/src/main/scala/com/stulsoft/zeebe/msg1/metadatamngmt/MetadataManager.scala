@@ -22,7 +22,9 @@ object MetadataManager extends App with LazyLogging {
       .build()
 
     // deploy workflow
-    val workflowDefPath = "src/main/resources/Msg1WF.bpmn"
+//    val workflowDefPath = "src/main/resources/Msg1WF.bpmn"
+//    val workflowDefPath = "src/main/resources/Msg2WF.bpmn"
+    val workflowDefPath = "src/main/resources/Msg3WF.bpmn"
     logger.info(s"Deploying $workflowDefPath ...")
     val deployment = zeebeClient.newDeployCommand()
       .addResourceFile(workflowDefPath)

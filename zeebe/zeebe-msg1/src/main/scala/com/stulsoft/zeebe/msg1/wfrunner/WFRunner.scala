@@ -26,7 +26,9 @@ object WFRunner extends App with LazyLogging {
     data.put("sum", 45.67)
 
     val wfInstance = zeebeClient.newCreateInstanceCommand()
-      .bpmnProcessId("DemoMessageWF_ID")
+//      .bpmnProcessId("DemoMessageWF_ID")
+//      .bpmnProcessId("DemoReceiveMessageWF_ID")
+      .bpmnProcessId("DemoReceiveMessageWithTimeoutWF_ID")
       .latestVersion()
       .variables(data)
       .send()
