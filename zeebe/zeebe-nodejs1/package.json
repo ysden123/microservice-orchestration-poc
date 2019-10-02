@@ -1,0 +1,20 @@
+{
+  "name": "zeebe-nodejs1",
+  "version": "1.0.0",
+  "description": "Test workers on NodeJS for Zeebe",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "zeebe",
+    "nodejs"
+  ],
+  "author": "Yuriy Stul",
+  "license": "MIT",
+  "dependencies": {
+    "zeebe-node": "^0.20.6",
+    "typescript": "^3.6.3"
+  }
+}
