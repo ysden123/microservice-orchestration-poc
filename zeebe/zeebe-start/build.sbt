@@ -12,7 +12,7 @@ lazy val projectVersion = "0.0.1"
 lazy val projectName = "zeebe-start"
 
 lazy val commonSettings = Seq(
-  organization := "com.webpals.expenses",
+  organization := "com.stulsoft.zeebe",
   version := projectVersion,
   javacOptions ++= Seq("-source", "1.8"),
   scalaVersion := "2.13.1",
