@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  zeebe-app2:
+    build: .
+    image: ysden123/zeebe-app2
+    container_name: zeebe-app2
