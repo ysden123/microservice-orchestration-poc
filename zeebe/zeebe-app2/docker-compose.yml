@@ -1,0 +1,12 @@
+version: '3.4'
+
+#networks:
+#  zeebe_network:
+#    driver: bridge
+
+services:
+  zeebe-app2:
+    build: .
+    image: ysden123/zeebe-app2
+    container_name: zeebe-app2
+    network_mode: host
