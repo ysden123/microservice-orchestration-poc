@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jre-alpine
 
 ARG APP_FILE=zeebe-app2-0.0.1-exec.jar
 ENV APP_FILE $APP_FILE

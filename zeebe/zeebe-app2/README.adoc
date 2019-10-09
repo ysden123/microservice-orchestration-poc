@@ -1,0 +1,19 @@
+= zeebe-app2
+
+Playing with Zeebe.
+
+Simple workers for playing with Docker.
+
+== Build
+
+[source,shell script]
+----
+mvn clean package
+----
+
+== Run
+
+[source,shell script]
+----
+docker-compose up
+----

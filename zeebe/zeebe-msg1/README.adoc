@@ -1,0 +1,20 @@
+= zeebe-msg1
+
+Playing with Zeebe.
+
+Demonstrates usage of _Message event_
+
+Separated
+
+* metadata management (MetadataManager)
+* workers (Workers)
+* workflow invoking (WFRunner)
+* sending message
+
+== Test
+
+. Run Zeebe
+. Run MetadataManager
+. Run Workers. It is possible to run Workers several times.
+. Run WFRunner
+. Run ApprovePayment
