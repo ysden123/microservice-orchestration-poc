@@ -11,9 +11,36 @@ Simple workers for playing with Docker.
 mvn clean package
 ----
 
-== Run
-
+== Running
+=== One instance
 [source,shell script]
 ----
 docker-compose up
 ----
+
+=== Two instances
+==== Create docker image.
+
+Run command:
+[source,shell script]
+
+docker build -rm -t ysden123/zeebe-app2 .
+
+==== Run instances
+
+Run following command in two different terminals:
+[source,shell script]
+
+docker run -rm -i --network host ysden123/zeebe-app2
+
+== Demo
+After image creation:
+
+1. Start simple zeebe monitor
+1. Open 2 terminals
+1. Run following command in each terminal:
+[source,shell script]
+docker run -rm -i --network host ysden123/zeebe-app2
+
+1. Deploy workflow via Zeebe Monitor web. Definition of work flow is in the src/main/resources/client-service.bpmn file
+1. Create new instance via Zeebe Monitor web.
