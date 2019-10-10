@@ -1,0 +1,17 @@
+= zeebe-msg1
+
+Playing with Zeebe.
+
+Demonstrates usage of _Condition_
+
+Separated
+
+ - workers (Workers)
+
+== Test
+
+. Run Zeebe
+. Connect to Web UI
+. In UI: Deploy workflow (condition-workflow.bpmn)
+. Run Workers
+. In UI: create new instance

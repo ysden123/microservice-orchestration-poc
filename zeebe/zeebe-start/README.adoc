@@ -1,0 +1,29 @@
+= zeebe-start
+
+Zeebe start project on Scala
+
+== Configuration
+
+== Build tool
+
+Install sbt from https://www.scala-sbt.org/ version 1.3.2 or later
+
+== Build
+
+Run commands from command line console:
+
+[source,shell script]
+----
+sbt clean
+sbt assembly
+
+----
+
+== Running
+
+Run command:
+
+[source,shell script]
+----
+java -jar metada-manager-<version>.jar
+----

@@ -1,0 +1,20 @@
+= zeebe-nodejs
+
+Simple Zeebe job worker (some service task) on Node JS.
+
+== Preparation
+
+Run command 
+[source,shell script]
+----
+npm install
+----
+
+== Running
+
+Run command
+
+[source,shell script]
+----
+npm start
+----
