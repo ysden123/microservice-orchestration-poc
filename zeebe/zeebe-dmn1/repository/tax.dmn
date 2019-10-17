@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="Definitions_09c5dno" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
+  <decision id="tax" name="Tax">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Age">
+        <inputExpression id="inputExpression_1" typeRef="integer">
+          <text>age</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Tax Value" name="taxValue" typeRef="integer" />
+      <rule id="DecisionRule_1938x1p">
+        <inputEntry id="UnaryTests_0u48xtt">
+          <text>[0..10]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_02m9p0t">
+          <text>10</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1t9h5kr">
+        <inputEntry id="UnaryTests_0jw8mce">
+          <text>[11..30]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0i02oun">
+          <text>20</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0kej9ir">
+        <inputEntry id="UnaryTests_1hnvvct">
+          <text>&gt; 30</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1lrdfov">
+          <text>40</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
