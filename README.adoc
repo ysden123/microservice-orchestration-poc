@@ -26,6 +26,9 @@ See link:zeebe/zeebe-app2/README.adoc[zeebe-app2]
 === zeebe-condition1
 See link:zeebe/zeebe-condition1/README.adoc[zeebe-condition1]
 
+=== zeebe-dmn1
+See link:zeebe/zeebe-dmn1/README.adoc[zeebe-dmn1]
+
 === zeebe-management
 See link:zeebe/zeebe-management/README.adoc[zeebe-management]
 
