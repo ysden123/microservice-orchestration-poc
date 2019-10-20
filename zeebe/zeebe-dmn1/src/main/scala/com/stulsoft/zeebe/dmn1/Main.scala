@@ -22,8 +22,12 @@ object Main extends App with LazyLogging {
       .brokerContactPoint(s"${AppConfig.zeebeHost}:${AppConfig.zeebePort}")
       .build()
 
+    // Define repository location
+    val repositoryFolder = sys.env.getOrElse("repository","repository")
+    logger.info(s"repositoryFolder: $repositoryFolder")
+
     logger.info("Deploying decisions...")
-    val dmnEngine = StandaloneEngine.fileSystemRepository("repository")
+    val dmnEngine = StandaloneEngine.fileSystemRepository(repositoryFolder)
 
     val deployedDecisions = dmnEngine.getDecisions
       .map(decision => s"${decision.decisionId} (${decision.resource})")

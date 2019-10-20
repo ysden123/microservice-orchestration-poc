@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  zeebe-dmn1:
+    build: .
+    image: ysden123/zeebe-dmn1
+    container_name: zeebe-dmn1
+    network_mode: host
+    volumes:
+      - ./repository:/usr/apps/zeebe-dmn1/repository1
+    environment:
+      - repository=repository1

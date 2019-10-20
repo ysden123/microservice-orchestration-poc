@@ -7,7 +7,7 @@ lazy val scalaTestVersion = "3.0.8"
 lazy val scalaLoggingVersion = "3.9.2"
 lazy val loggingVersion = "2.12.0"
 
-lazy val projectVersion = "1.0.0"
+lazy val projectVersion = "1.1.0"
 lazy val projectName = "zeebe-dmn1"
 
 lazy val commonSettings = Seq(
