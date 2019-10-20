@@ -22,7 +22,13 @@ A folder _target/universal/stage_ contains two sub-folders:
 - lib - all necessary JAR files
 
 == How to run
+Run command:
+[source,shell script]
 docker run --rm -i --network host ysden123/zeebe-dmn1
+
+or
+[source,shell script]
+docker-compose up
 
 == Test
 
