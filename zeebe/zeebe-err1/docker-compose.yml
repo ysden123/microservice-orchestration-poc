@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  zeebe-dmn1:
+    build: .
+    image: ysden123/zeebe-err1
+    container_name: zeebe-err1
+    network_mode: host
