@@ -44,4 +44,7 @@ See link:zeebe/zeebe-nodejs1/README.adoc[zeebe-nodejs1]
 === zeebe-start
 See link:zeebe/zeebe-start/README.adoc[zeebe-start]
 
+=== zeebe-test1
+See link:zeebe/zeebe-start/README.adoc[zeebe-test1]
+
 
