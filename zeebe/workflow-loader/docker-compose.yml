@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  zeebe-app2:
+  workflow-loader:
     build: .
     image: webpals/workflow-loader
     container_name: workflow-loader
