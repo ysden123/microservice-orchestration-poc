@@ -1,8 +1,19 @@
-= zeebe-app2
+= workflow-loader
 
-Playing with Zeebe.
+Deploys Zeebe workflows.
 
-Simple workers for playing with Docker.
+== Repository structure
+
+Workflow loader supposes following file structure of a workflow repository:
+----
+<repository path>
+  <service name path 1>
+    workflow1.bpmn
+    workflow2.bpmn
+  <service name path 2>
+    workflow1.bpmn
+    workflow2.bpmn
+----
 
 == Build
 
@@ -24,23 +35,11 @@ docker-compose up
 Run command:
 [source,shell script]
 
-docker build -rm -t ysden123/zeebe-app2 .
+docker build -rm -t webpals/workflow-loader .
 
 ==== Run instances
 
 Run following command in two different terminals:
 [source,shell script]
 
-docker run -rm -i --network host ysden123/zeebe-app2
-
-== Demo
-After image creation:
-
-1. Start simple zeebe monitor
-1. Open 2 terminals
-1. Run following command in each terminal:
-[source,shell script]
-docker run -rm -i --network host ysden123/zeebe-app2
-
-1. Deploy workflow via Zeebe Monitor web. Definition of work flow is in the src/main/resources/client-service.bpmn file
-1. Create new instance via Zeebe Monitor web.
+docker run -rm -i --network host webpals/workflow-loader

@@ -14,7 +14,7 @@ import java.io.File;
 /**
  * @author Yuriy Stul
  */
-public class Main {
+final public class Main {
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
     static class AppConfig {
@@ -36,6 +36,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        if (args.length != 2){
+            logger.error("Number of arguments should be 2");
+            logger.info("Example: java -jar <jar name> <path to repository> <service name>");
+            System.exit(1);
+        }
         logger.info("Workflow loader is started");
     }
 }

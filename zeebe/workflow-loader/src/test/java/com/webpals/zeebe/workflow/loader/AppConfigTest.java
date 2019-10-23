@@ -4,23 +4,25 @@
 
 package com.webpals.zeebe.workflow.loader;
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Yuriy Stul
  */
-class AppConfigTest {
+public class AppConfigTest {
 
     @Test
-    void appConfigHost() {
+    public void appConfigHost() {
         String host = Main.AppConfig.zeebeHost();
         assertNotNull(host);
     }
 
     @Test
-    void appConfigPort() {
+    public void appConfigPort() {
         int port = Main.AppConfig.zeebePort();
         assertTrue(port > 0);
     }

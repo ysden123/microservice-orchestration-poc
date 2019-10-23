@@ -16,6 +16,8 @@
 
         <Logger name="io.grpc" level="error"/>
         <Logger name="io.netty" level="error"/>
+        <Logger name="io.zeebe" level="error"/>
+        <Logger name="io.atomix" level="error"/>
         <!--<AppenderRef ref="Console"/>-->
         <!--</Logger>-->
     </Loggers>
