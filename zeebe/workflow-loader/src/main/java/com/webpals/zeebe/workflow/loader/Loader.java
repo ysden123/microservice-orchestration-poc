@@ -33,6 +33,8 @@ final class Loader {
     void deployWorkflows() {
         String[] fileNames = workflowFileNames();
         logger.info("Deploying {} workflows...", fileNames.length);
+        int successCount = 0;
+        int failedCount = 0;
         for (String fileName : fileNames) {
             try {
                 logger.info("Deploying {} ...", fileName);
@@ -41,11 +43,16 @@ final class Loader {
                         .send()
                         .join();
                 logger.info("Deployed {}", fileName);
+                ++successCount;
             } catch (Exception ex) {
                 String msg = "Deployment of " + fileName + " failed. " + ex.getMessage();
                 logger.error(msg);
+                ++failedCount;
             }
         }
+
+        logger.info("From repository {} for service {} {} succeeded, {} failed",
+                repositoryPath, serviceName, successCount, failedCount);
     }
 
     private String[] workflowFileNames() {
