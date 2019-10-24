@@ -92,12 +92,6 @@ One workflow:
 java -jar target\workflow-loader-1.0.0-exec.jar src/test/resources/repository service1 client-service.bpmn
 ----
 
-
-
-
-
-
-
 === With docker
 ==== Build docker
 Run command:
@@ -107,9 +101,13 @@ docker build -rm -t webpals/workflow-loader .
 ----
 ==== Run
 
+Prepare docker-compose.yml:
+
+- change volumes
+- change environment
+
+Run command:
 [source,shell script]
 ----
-docker run -rm -i --network host webpals/workflow-loader \
--e ZEEBE_HOST=<host address> \
--e ZEEBEE_PORT=<port>
+docker-compose up
 ----
