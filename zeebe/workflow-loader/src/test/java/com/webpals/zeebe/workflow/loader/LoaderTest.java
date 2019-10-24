@@ -20,19 +20,28 @@ public class LoaderTest {
     private ZeebeClient client;
 
     @Before
-    public void createClient(){
+    public void createClient() {
         client = testRule.getClient();
     }
 
     @After
-    public void closeClient(){
+    public void closeClient() {
         client.close();
     }
 
     @Test
-    public void deployWorkflows() {
+    public void deployWorkflowsWOwfName() {
         client = testRule.getClient();
-        Loader loader = new Loader("src/test/resources/repository", "service1", client);
+        Loader loader = new Loader("src/test/resources/repository",
+                "service1", null, client);
+        loader.deployWorkflows();
+    }
+
+    @Test
+    public void deployWorkflowsWithwfName() {
+        client = testRule.getClient();
+        Loader loader = new Loader("src/test/resources/repository",
+                "service1", "client-service.bpmn", client);
         loader.deployWorkflows();
     }
 }

@@ -6,6 +6,7 @@ package com.webpals.zeebe.workflow.loader;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
+import io.zeebe.client.ZeebeClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,11 +37,43 @@ final public class Main {
     }
 
     public static void main(String[] args) {
-        if (args.length != 2){
-            logger.error("Number of arguments should be 2");
-            logger.info("Example: java -jar <jar name> <path to repository> <service name>");
+        String repository = null;
+        String service = null;
+        String wfName = null;
+        if (args.length >=2){
+            // Get arguments from command line
+            repository = args[0];
+            service = args[1];
+            if (args.length > 2){
+                wfName=args[2];
+            }
+        }else{
+            // Get arguments from environment variables
+            repository = System.getenv("REPOSITORY");
+            service = System.getenv("SERVICE");
+            wfName = System.getenv("WF_NAME");
+        }
+        if (repository == null || service == null){
+            logger.error("Undefined repository [{}] or/and service [{}]", repository, service);
             System.exit(1);
         }
-        logger.info("Workflow loader is started");
+
+        logger.info("Starting workflow loader for {} repository, {} service, and {} workflow ...",
+                repository, service, wfName);
+
+        String contactPoint = String.format("%s:%d", AppConfig.zeebeHost(), AppConfig.zeebePort());
+        try (ZeebeClient client = ZeebeClient
+                .newClientBuilder()
+                .brokerContactPoint(contactPoint)
+                .build()) {
+
+            logger.info("Workflow loader is started");
+
+            Loader loader = new Loader(repository, service, wfName, client);
+            loader.deployWorkflows();
+        } catch (Exception ex) {
+            logger.error("Failure: " + ex.getMessage(), ex);
+            System.exit(2);
+        }
     }
 }

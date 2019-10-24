@@ -23,23 +23,93 @@ mvn clean package
 ----
 
 == Running
-=== One instance
+
+The application requires configuration of Zeebe contact point.
+
+Default values are:
+
+ - host = 127.0.01
+ - port = 26500
+
+If it is necessary to change default values then system variables may be used.
+
+=== Without docker
+==== Windows
+Set Zeebe contact point, if necessary.
+
 [source,shell script]
 ----
-docker-compose up
+set ZEEBE_HOST=<host address>
+set ZEEBE_PORT=<port>
 ----
 
-=== Two instances
-==== Create docker image.
+Run application:
+[source,shell script]
+----
+java -jar <path to workflow-loader-VERSION-exec.jar> <path to repository> <service name> [<workflow file name]
+----
 
+Examples.
+
+All workflows:
+[source,shell script]
+----
+java -jar target\workflow-loader-1.0.0-exec.jar src\test\resources\repository service1
+----
+
+One workflow:
+[source,shell script]
+----
+java -jar target\workflow-loader-1.0.0-exec.jar src\test\resources\repository service1 client-service.bpmn
+----
+
+==== Linux
+Set Zeebe contact point, if necessary.
+
+[source,shell script]
+----
+export ZEEBE_HOST=<host address>
+export ZEEBE_PORT=<port>
+----
+
+Run application:
+[source,shell script]
+----
+java -jar <path to workflow-loader-VERSION-exec.jar> <path to repository> <service name> [<workflow file name]
+----
+
+Examples.
+
+All workflows:
+[source,shell script]
+----
+java -jar target\workflow-loader-1.0.0-exec.jar src/test/resources/repository service1
+----
+
+One workflow:
+[source,shell script]
+----
+java -jar target\workflow-loader-1.0.0-exec.jar src/test/resources/repository service1 client-service.bpmn
+----
+
+
+
+
+
+
+
+=== With docker
+==== Build docker
 Run command:
 [source,shell script]
-
+----
 docker build -rm -t webpals/workflow-loader .
+----
+==== Run
 
-==== Run instances
-
-Run following command in two different terminals:
 [source,shell script]
-
-docker run -rm -i --network host webpals/workflow-loader
+----
+docker run -rm -i --network host webpals/workflow-loader \
+-e ZEEBE_HOST=<host address> \
+-e ZEEBEE_PORT=<port>
+----

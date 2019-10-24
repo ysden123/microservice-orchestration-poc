@@ -10,29 +10,34 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Yuriy Stul
  */
 final class Loader {
     private static Logger logger = LoggerFactory.getLogger(Loader.class);
-    private String repositoryPath;
-    private String serviceName;
-    private ZeebeClient client;
+    private final String repositoryPath;
+    private final String serviceName;
+    private final String wfName;
+    private final ZeebeClient client;
 
-    Loader(String repositoryPath, String serviceName, ZeebeClient client) {
+    Loader(String repositoryPath, String serviceName, String wfName, ZeebeClient client) {
         Objects.requireNonNull(repositoryPath, "repositoryPath should be specified");
         Objects.requireNonNull(serviceName, "serviceName should be specified");
         Objects.requireNonNull(client, "client should be specified");
         this.repositoryPath = repositoryPath;
         this.serviceName = serviceName;
+        this.wfName = wfName;
         this.client = client;
     }
 
     void deployWorkflows() {
-        String[] fileNames = workflowFileNames();
-        logger.info("Deploying {} workflows...", fileNames.length);
+        List<String> fileNames = workflowFileNames();
+        logger.info("Deploying {} workflows...", fileNames.size());
         int successCount = 0;
         int failedCount = 0;
         for (String fileName : fileNames) {
@@ -55,7 +60,7 @@ final class Loader {
                 repositoryPath, serviceName, successCount, failedCount);
     }
 
-    private String[] workflowFileNames() {
+    private List<String> workflowFileNames() {
         String pathName = repositoryPath + "/" + serviceName;
         File repository = new File(pathName);
         if (!repository.exists()) {
@@ -64,7 +69,13 @@ final class Loader {
             throw new RuntimeException(msg);
         }
 
-        return Arrays.stream(Objects.requireNonNull(repository.list((dir, name) -> name.endsWith(".bpmn"))))
-                .map(n -> pathName + "/" + n).toArray(String[]::new);
+        Stream<String> fileNames;
+
+        if (wfName == null || wfName.isEmpty()) {
+            fileNames = Arrays.stream(Objects.requireNonNull(repository.list((dir, name) -> name.endsWith(".bpmn"))));
+        }else{
+            fileNames = Arrays.stream(Objects.requireNonNull(repository.list((dir, name) -> name.equals(wfName))));
+        }
+        return fileNames.map(n -> pathName + "/" + n).collect(Collectors.toList());
     }
 }
