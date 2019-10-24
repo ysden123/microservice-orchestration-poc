@@ -1,0 +1,10 @@
+= zeebe-test1
+
+Playing with Zeebe testing.
+
+Demonstrates unit testing in Zeebe.
+
+== Test
+Run MainTest class from IDEA or run
+[source, shell script]
+sbt test

@@ -1,0 +1,39 @@
+= zeebe-dmn1
+
+Playing with Zeebe and error handling.
+
+Demonstrates error handling in Zeebe
+
+== How to build
+=== Prepare JARs
+Run command:
+[source,shell script]
+sbt stage
+
+=== Build docker image
+Run command:
+[source,shell script]
+docker build --rm -t ysden123/zeebe-err1 .
+
+== Where is a result
+A folder _target/universal/stage_ contains two sub-folders:
+
+- bin - scripts to run a _Main_ class
+- lib - all necessary JAR files
+
+== How to run
+Run command:
+[source,shell script]
+docker run --rm -i --network host ysden123/zeebe-err1
+
+or
+[source,shell script]
+docker-compose up
+
+== Test
+
+. Run Zeebe, e.g. simple zeebe monitor
+. Connect to Web UI
+. In UI: Deploy workflow (workflow/errorDemoWF.bpmn)
+. Run docker (see "How to run")
+. In UI: create new instance with variable p1 = "test"
