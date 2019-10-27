@@ -4,13 +4,9 @@
 
 package com.webpals.zeebe.workflow.loader;
 
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
 import io.zeebe.client.ZeebeClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
 
 /**
  * @author Yuriy Stul
@@ -18,27 +14,9 @@ import java.io.File;
 final public class Main {
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
-    static class AppConfig {
-        private static Config config;
-
-        static {
-            config = ConfigFactory
-                    .parseFile(new File("application.conf"))
-                    .withFallback(ConfigFactory.load());
-        }
-
-        static String zeebeHost() {
-            return config.getConfig("zeebe").getString("host");
-        }
-
-        static int zeebePort() {
-            return config.getConfig("zeebe").getInt("port");
-        }
-    }
-
     public static void main(String[] args) {
-        String repository = null;
-        String service = null;
+        String repository;
+        String service;
         String wfName = null;
         if (args.length >=2){
             // Get arguments from command line
@@ -61,7 +39,9 @@ final public class Main {
         logger.info("Starting workflow loader for {} repository, {} service, and {} workflow ...",
                 repository, service, wfName);
 
-        String contactPoint = String.format("%s:%d", AppConfig.zeebeHost(), AppConfig.zeebePort());
+        String contactPoint = String.format("%s:%d",
+                AppConfig.getInstance().zeebeHost(),
+                AppConfig.getInstance().zeebePort());
         try (ZeebeClient client = ZeebeClient
                 .newClientBuilder()
                 .brokerContactPoint(contactPoint)

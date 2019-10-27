@@ -17,13 +17,13 @@ public class AppConfigTest {
 
     @Test
     public void appConfigHost() {
-        String host = Main.AppConfig.zeebeHost();
+        String host = AppConfig.getInstance().zeebeHost();
         assertNotNull(host);
     }
 
     @Test
     public void appConfigPort() {
-        int port = Main.AppConfig.zeebePort();
+        int port = AppConfig.getInstance().zeebePort();
         assertTrue(port > 0);
     }
 }
