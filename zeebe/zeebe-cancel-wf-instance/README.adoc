@@ -1,0 +1,11 @@
+= workflow-loader
+
+Demonstrates cancellation of a workflow instance.
+
+== Running
+Demo:
+
+. Run simple zeebe monitor
+. Run Main class
+. Deploy workflow (workflows/cancelation-demo.bpmn) in Monitor
+. Create a new instance of the workflow in Monitor

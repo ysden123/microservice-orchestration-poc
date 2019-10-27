@@ -5,6 +5,7 @@
 package com.webpals.zeebe.workflow.loader;
 
 import io.zeebe.client.ZeebeClient;
+import io.zeebe.client.api.response.DeploymentEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,11 +44,16 @@ final class Loader {
         for (String fileName : fileNames) {
             try {
                 logger.info("Deploying {} ...", fileName);
-                client.newDeployCommand()
+                DeploymentEvent deploymentEvent = client.newDeployCommand()
                         .addResourceFile(fileName)
                         .send()
                         .join();
                 logger.info("Deployed {}", fileName);
+                deploymentEvent.getWorkflows().forEach(wf -> logger.info("BPMN Process ID: {}, resource name: {}, version: {}, workflow key={}",
+                        wf.getBpmnProcessId(),
+                        wf.getResourceName(),
+                        wf.getVersion(),
+                        wf.getWorkflowKey()));
                 ++successCount;
             } catch (Exception ex) {
                 String msg = "Deployment of " + fileName + " failed. " + ex.getMessage();
@@ -73,7 +79,7 @@ final class Loader {
 
         if (wfName == null || wfName.isEmpty()) {
             fileNames = Arrays.stream(Objects.requireNonNull(repository.list((dir, name) -> name.endsWith(".bpmn"))));
-        }else{
+        } else {
             fileNames = Arrays.stream(Objects.requireNonNull(repository.list((dir, name) -> name.equals(wfName))));
         }
         return fileNames.map(n -> pathName + "/" + n).collect(Collectors.toList());

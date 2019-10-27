@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0tep3ad" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.7.0">
+  <bpmn:process id="CancelationDemoWF_ID" name="Cancelation demo" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_0hj4n4u" name="start">
+      <bpmn:outgoing>SequenceFlow_10bal2z</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="ServiceTask_0o3p04r" name="Step 1">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="step1" retries="2" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_10bal2z</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1jfeh87</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ServiceTask_03blnpk" name="Step 2">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="step2" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1jfeh87</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1gauw7y</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_19l4iib" name="end">
+      <bpmn:incoming>SequenceFlow_1gauw7y</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_10bal2z" sourceRef="StartEvent_0hj4n4u" targetRef="ServiceTask_0o3p04r" />
+    <bpmn:sequenceFlow id="SequenceFlow_1jfeh87" sourceRef="ServiceTask_0o3p04r" targetRef="ServiceTask_03blnpk" />
+    <bpmn:sequenceFlow id="SequenceFlow_1gauw7y" sourceRef="ServiceTask_03blnpk" targetRef="EndEvent_19l4iib" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="CancelationDemoWF_ID">
+      <bpmndi:BPMNShape id="StartEvent_0hj4n4u_di" bpmnElement="StartEvent_0hj4n4u">
+        <dc:Bounds x="152" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="159" y="175" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0o3p04r_di" bpmnElement="ServiceTask_0o3p04r">
+        <dc:Bounds x="243" y="110" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_03blnpk_di" bpmnElement="ServiceTask_03blnpk">
+        <dc:Bounds x="403" y="110" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_19l4iib_di" bpmnElement="EndEvent_19l4iib">
+        <dc:Bounds x="565" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="574" y="175" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_10bal2z_di" bpmnElement="SequenceFlow_10bal2z">
+        <di:waypoint x="188" y="150" />
+        <di:waypoint x="243" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1jfeh87_di" bpmnElement="SequenceFlow_1jfeh87">
+        <di:waypoint x="343" y="150" />
+        <di:waypoint x="403" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1gauw7y_di" bpmnElement="SequenceFlow_1gauw7y">
+        <di:waypoint x="503" y="150" />
+        <di:waypoint x="565" y="150" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
