@@ -4,33 +4,33 @@
 Worker - link:src/main/scala/com/stulsoft/poc/simple/worker/Worker1.scala[Worker1]
 
 === Running flow I
-1. Start conductor
-1. Send POST request with link:/src/main/resources/taskDefinition.json[taskDefinition.json]
-1. Send POST request with link:/src/main/resources/workflowDefinition.json[workflowDefinition.json]
-1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner]
-1. Send POST request with link:/src/main/resources/startWorkflow.json[startWorkflow.json]
-1. Remember workflow ID
-1. Send GET request http://localhost:8080/api/workflow/8975db77-5965-459f-a4fb-51d07061c7bf?includeTasks=false (change workflow ID!!!)
+. Start conductor
+. Send POST request with link:/src/main/resources/taskDefinition.json[taskDefinition.json]
+. Send POST request with link:/src/main/resources/workflowDefinition.json[workflowDefinition.json]
+. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner]
+. Send POST request with link:/src/main/resources/startWorkflow.json[startWorkflow.json]
+. Remember workflow ID
+. Send GET request http://localhost:8080/api/workflow/8975db77-5965-459f-a4fb-51d07061c7bf?includeTasks=false (change workflow ID!!!)
 
 === Running flow II
-1. Start conductor
-1. Send POST request with link:/src/main/resources/taskDefinition.json[taskDefinition.json]
-1. Send POST request with link:/src/main/resources/workflowDefinition.json[workflowDefinition.json]
-1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner] to register a worker
-1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[WorkflowRunner] to start the workflow and to get a result
+. Start conductor
+. Send POST request with link:/src/main/resources/taskDefinition.json[taskDefinition.json]
+. Send POST request with link:/src/main/resources/workflowDefinition.json[workflowDefinition.json]
+. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner] to register a worker
+. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[WorkflowRunner] to start the workflow and to get a result
 
 === Running flow III
 Task and workflow is defined programmatic:
 
-1. Start conductor
-1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/TaskDefinitionCreator.scala[TaskDefinitionCreator] to register a task and workflow
-1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner] to register a worker
-1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[WorkflowRunner] to start the workflow and to get a result
+. Start conductor
+. Run link:src/main/scala/com/stulsoft/poc/simple/worker/TaskDefinitionCreator.scala[TaskDefinitionCreator] to register a task and workflow
+. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner] to register a worker
+. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[WorkflowRunner] to start the workflow and to get a result
 
 === Running flow IV
 Task and workflow is defined from JSON files:
 
-1. Start conductor
-1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/TaskDefinitionCreator2.scala[TaskDefinitionCreator2] to register a task and workflow
-1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[Worker1Runner] to register a worker
-1. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner.scala[WorkflowRunner] to start the workflow and to get a result
+. Start conductor
+. Run link:src/main/scala/com/stulsoft/poc/simple/worker/TaskDefinitionCreator2.scala[TaskDefinitionCreator2] to register a task and workflow
+. Run link:src/main/scala/com/stulsoft/poc/simple/worker/Worker1Runner.scala[Worker1Runner] to register a worker
+. Run link:src/main/scala/com/stulsoft/poc/simple/worker/WorkflowRunner3.scala[WorkflowRunner3] to start the workflow and to get a result
