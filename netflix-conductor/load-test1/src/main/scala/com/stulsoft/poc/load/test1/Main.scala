@@ -45,7 +45,7 @@ object Main extends App with StrictLogging {
     val futures = new ListBuffer[Future[Unit]]()
     val start = System.currentTimeMillis()
     val n = 100
-//    val n = 150000
+    //    val n = 150000
     //    val n = 2
     Future(workExecutionWatcher(n))
     (1 to n).foreach(_ => futures += Future(runWorkflow()))
@@ -63,15 +63,22 @@ object Main extends App with StrictLogging {
 
     val taskDefsAsText = Source.fromResource("taskDefinition.json").mkString
     val taskDefs = objectMapper.readValue(taskDefsAsText, classOf[Array[TaskDef]])
-    val newTaskDefs = taskDefs.filter(td => metadataClient.getTaskDef(td.getName) == null).toList
+    val newTaskDefs = taskDefs.filter(td => {
+      try {
+        // Throws exception if task doesn't exist.
+        metadataClient.getTaskDef(td.getName) == null
+      } catch {
+        case ex: Exception =>
+          true
+      }
+    }).toList
     logger.info(s"Total number of tasks = ${taskDefs.length}, number of new tasks = ${newTaskDefs.length}")
 
     if (newTaskDefs.nonEmpty) {
       try {
         logger.info("Registering task definition...")
-        val now = System.currentTimeMillis()
         metadataClient.registerTaskDefs(newTaskDefs.asJava)
-        logger.info(s"Registration completed in ${System.currentTimeMillis() - now} ms")
+        logger.info(s"Task definition registration completed")
       } catch {
         case e: Exception =>
           logger.error(s"Failed task definition registration: ${e.getMessage}")
@@ -81,18 +88,22 @@ object Main extends App with StrictLogging {
 
     val workflowAsText = Source.fromResource("workflowDefinition.json").mkString
     val workflowDef = objectMapper.readValue(workflowAsText, classOf[WorkflowDef])
-    if (metadataClient.getWorkflowDef(workflowDef.getName, workflowDef.getVersion) == null) {
-      try {
-        logger.info("Registering workflow definition...")
-        val now = System.currentTimeMillis()
-        metadataClient.registerWorkflowDef(workflowDef)
-        logger.info(s"Registration completed in ${System.currentTimeMillis() - now} ms")
-      } catch {
-        case e: Exception =>
-          logger.error(s"Failed workflow definition registration: ${e.getMessage}")
-          sys.exit(-1)
-      }
+    try {
+      val wf = metadataClient.getWorkflowDef(workflowDef.getName, workflowDef.getVersion)
+      logger.info(s"Workflow definition registration completed")
+    } catch {
+      case ex: Exception =>
+        try {
+          logger.info("Registering workflow definition...")
+          metadataClient.registerWorkflowDef(workflowDef)
+          logger.info(s"Workflow definition registration completed")
+        } catch {
+          case e: Exception =>
+            logger.error(s"Failed workflow definition registration: ${e.getMessage}")
+            sys.exit(-1)
+        }
     }
+
     logger.info("<==loadTaskAndWFDefinitions")
   }
 
