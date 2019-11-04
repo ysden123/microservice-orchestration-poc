@@ -5,6 +5,11 @@ Playing with microservice orchestration
 === conductor-tools
 Helper classes.
 
+=== load-test1
+Load test 1.
+
+See link:netflix-conductor/load-test1/README.adoc[load-test1]
+
 === nodejs-worker1
 Example of worker on Node JS.
 
