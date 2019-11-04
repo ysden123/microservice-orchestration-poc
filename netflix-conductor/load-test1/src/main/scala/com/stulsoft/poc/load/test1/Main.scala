@@ -38,13 +38,14 @@ object Main extends App with StrictLogging {
     loadTaskAndWFDefinitions()
 
     // run workers
-    val workProcessCount = 5
+    val workProcessCount = 2
     (1 to workProcessCount).foreach(_ => Future(runWorkers()))
 
     // run workflows
     val futures = new ListBuffer[Future[Unit]]()
     val start = System.currentTimeMillis()
     val n = 100
+//    val n = 150000
     //    val n = 2
     Future(workExecutionWatcher(n))
     (1 to n).foreach(_ => futures += Future(runWorkflow()))
@@ -104,7 +105,7 @@ object Main extends App with StrictLogging {
     val worker1 = new Worker1(workCounter)
 
     // Create workflow coordinator
-    System.setProperty("conductor.worker.pollInterval", "500")
+    System.setProperty("conductor.worker.pollInterval", "100")
     //    System.setProperty("conductor.worker.pollInterval", "1000") // Default
     val builder = new WorkflowTaskCoordinator.Builder
     val coordinator = builder

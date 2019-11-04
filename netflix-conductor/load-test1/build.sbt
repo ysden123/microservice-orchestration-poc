@@ -14,7 +14,7 @@ lazy val projectName = "load-test1"
 lazy val commonSettings = Seq(
   organization := "com.stulsoft",
   version := projectVersion,
-  javacOptions ++= Seq("-source", "1.8"),
+  javacOptions ++= Seq("-source", "11"),
   scalaVersion := "2.13.1",
   scalacOptions ++= Seq(
     "-feature",
