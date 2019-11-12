@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Error_test_1_workflow",
+    "description": "Workflow error handling test",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "errorTestTask1",
+        "taskReferenceName": "errorTestTask1_ref",
+        "description": "Error test 1",
+        "inputParameters": {
+          "eventData": "${workflow.input.eventData}"
+        },
+        "type": "SIMPLE",
+        "startDelay": 0,
+        "optional": false
+      },
+      {
+        "name": "errorTestTask2",
+        "taskReferenceName": "errorTestTask2_ref",
+        "description": "Error test 2",
+        "inputParameters": {
+          "eventData": "${workflow.input.eventData}"
+        },
+        "type": "SIMPLE",
+        "startDelay": 0,
+        "optional": false
+      }
+    ],
+    "schemaVersion": 2,
+    "restartable": true
+  }
+]

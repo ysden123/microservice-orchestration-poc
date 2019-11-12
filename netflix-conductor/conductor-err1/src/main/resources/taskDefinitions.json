@@ -1,0 +1,44 @@
+[
+  {
+    "name": "errorTestTask1",
+    "retryCount": 3,
+    "timeoutSeconds": 1200,
+    "inputKeys": [
+      "sourceRequestId",
+      "qcElementType"
+    ],
+    "outputKeys": [
+      "state",
+      "skipped",
+      "result"
+    ],
+    "timeoutPolicy": "TIME_OUT_WF",
+    "retryLogic": "FIXED",
+    "retryDelaySeconds": 2,
+    "responseTimeoutSeconds": 1100,
+    "concurrentExecLimit": 100,
+    "rateLimitFrequencyInSeconds": 60,
+    "rateLimitPerFrequency": 50
+  },
+  {
+    "name": "errorTestTask1",
+    "retryCount": 3,
+    "timeoutSeconds": 1200,
+    "inputKeys": [
+      "sourceRequestId",
+      "qcElementType"
+    ],
+    "outputKeys": [
+      "state",
+      "skipped",
+      "result"
+    ],
+    "timeoutPolicy": "TIME_OUT_WF",
+    "retryLogic": "FIXED",
+    "retryDelaySeconds": 2,
+    "responseTimeoutSeconds": 1100,
+    "concurrentExecLimit": 100,
+    "rateLimitFrequencyInSeconds": 60,
+    "rateLimitPerFrequency": 50
+  }
+]
