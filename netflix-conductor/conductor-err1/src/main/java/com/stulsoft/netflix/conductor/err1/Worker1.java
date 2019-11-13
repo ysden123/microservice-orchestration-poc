@@ -40,7 +40,9 @@ public class Worker1 implements Worker {
         }
 
         result.setReasonForIncompletion("Test1 worker: test exception ");
+        // Fails the task, repeat is allowed
         result.setStatus(TaskResult.Status.FAILED);
+        // Terminates the task and workflow, no repeat allowed
 //        result.setStatus(TaskResult.Status.FAILED_WITH_TERMINAL_ERROR);
 //        result.setStatus(TaskResult.Status.COMPLETED);
         return result;
