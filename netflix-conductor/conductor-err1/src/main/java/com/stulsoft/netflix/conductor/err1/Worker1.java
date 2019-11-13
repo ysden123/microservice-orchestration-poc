@@ -17,6 +17,11 @@ import java.util.Map;
  */
 public class Worker1 implements Worker {
     private static final Logger logger = LoggerFactory.getLogger(Worker1.class);
+
+    Worker1() {
+        logger.info("Initializing Worker1");
+    }
+
     @Override
     public String getTaskDefName() {
         return "errorTestTask1";
@@ -25,16 +30,19 @@ public class Worker1 implements Worker {
     @Override
     public TaskResult execute(Task task) {
         logger.debug("task.getInputData: {}", task.getInputData());
-        task.getInputData().forEach((k,v) ->logger.info("Key: {}, value: {}",k,v));
-        Map<String,Object> eventData = task.getInputData();
+        task.getInputData().forEach((k, v) -> logger.info("Key: {}, value: {}", k, v));
+        Map<String, Object> eventData = task.getInputData();
         TaskResult result = new TaskResult(task);
         logger.debug("eventData: {}", eventData.toString());
         try {
             Thread.sleep(300);
-        }catch(Exception ignore){}
+        } catch (Exception ignore) {
+        }
 
         result.setReasonForIncompletion("Test1 worker: test exception ");
         result.setStatus(TaskResult.Status.FAILED);
+//        result.setStatus(TaskResult.Status.FAILED_WITH_TERMINAL_ERROR);
+//        result.setStatus(TaskResult.Status.COMPLETED);
         return result;
     }
 }

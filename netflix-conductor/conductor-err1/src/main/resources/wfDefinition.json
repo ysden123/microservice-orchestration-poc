@@ -2,7 +2,7 @@
   {
     "name": "Error_test_1_workflow",
     "description": "Workflow error handling test",
-    "version": 1,
+    "version": 5,
     "tasks": [
       {
         "name": "errorTestTask1",
@@ -28,6 +28,6 @@
       }
     ],
     "schemaVersion": 2,
-    "restartable": true
+    "restartable": false
   }
 ]

@@ -44,7 +44,7 @@ object Main extends App with StrictLogging {
     // run workflows
     val futures = new ListBuffer[Future[Unit]]()
     val start = System.currentTimeMillis()
-    val n = 100
+    val n = 10
     //    val n = 150000
     //    val n = 2
     Future(workExecutionWatcher(n))

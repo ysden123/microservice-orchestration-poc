@@ -60,12 +60,15 @@ public class Main {
                     // Throws exception if task doesn't exist.
                     if (metadataClient.getTaskDef(taskDef.getName()) == null)
                         taskDefsToRegister.add(taskDef);
+                    else
+                        metadataClient.updateTaskDef(taskDef);
                 } catch (Exception ignore) {
                     taskDefsToRegister.add(taskDef);
                 }
             }
             logger.info("Registering {} from {} tasks ...", taskDefsToRegister.size(), taskDefs.length);
-            metadataClient.registerTaskDefs(taskDefsToRegister);
+            if (!taskDefsToRegister.isEmpty())
+                metadataClient.registerTaskDefs(taskDefsToRegister);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             System.exit(1);
@@ -81,6 +84,7 @@ public class Main {
 
         try {
             WorkflowDef[] wfDefs = objectMapper.readValue(Main.class.getClassLoader().getResourceAsStream("wfDefinition.json"), WorkflowDef[].class);
+//            WorkflowDef[] wfDefs = objectMapper.readValue(Main.class.getClassLoader().getResourceAsStream("wfDefinition1.json"), WorkflowDef[].class);
             logger.info("Registering {} workflows ...", wfDefs.length);
             for (WorkflowDef wfDef : wfDefs) {
                 try {
@@ -125,7 +129,7 @@ public class Main {
             workflowClient.setRootURI(AppConfig.getInstance().rootURI());
             StartWorkflowRequest startWorkflowRequest = new StartWorkflowRequest();
             startWorkflowRequest.setName("Error_test_1_workflow");
-            startWorkflowRequest.setVersion(1);
+            startWorkflowRequest.setVersion(5);
             Map<String, Object> inputData = new HashMap<>();
             inputData.put("sourceRequestId", 1);
             inputData.put("qcElementType", "test");

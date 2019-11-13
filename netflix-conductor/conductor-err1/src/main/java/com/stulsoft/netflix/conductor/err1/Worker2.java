@@ -17,9 +17,14 @@ import java.util.Map;
  */
 public class Worker2  implements Worker {
     private static final Logger logger = LoggerFactory.getLogger(Worker2.class);
+
+    Worker2() {
+        logger.info("Initializing Worker2");
+    }
+
     @Override
     public String getTaskDefName() {
-        return "errorTestTask1";
+        return "errorTestTask2";
     }
 
     @Override

@@ -13,5 +13,6 @@
         <Root level="debug">
             <AppenderRef ref="Console" />
         </Root>
+        <Logger name="com.netflix.conductor" level="error"/>
     </Loggers>
 </Configuration>
