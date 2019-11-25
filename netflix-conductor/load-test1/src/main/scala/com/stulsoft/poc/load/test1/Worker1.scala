@@ -27,6 +27,7 @@ class Worker1(workCounter:AtomicInteger) extends Worker with StrictLogging {
     if (eventData != null) {
       eventData.forEach((k, v) => logger.debug(s"$k -> $v"))
 
+      Thread.sleep(1000)
       //Register the output of the task
       val resultData = new util.HashMap[String, Any]()
       resultData.put("state", "the state value")

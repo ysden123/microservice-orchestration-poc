@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  zeebe-dmn1:
+    build: .
+    image: ysden123/load-test2
+    container_name: load-test2
+    network_mode: host
