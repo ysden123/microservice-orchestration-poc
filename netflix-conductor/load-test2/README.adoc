@@ -1,7 +1,29 @@
 = load-test2
 
-Load test.
+Load test 2.
 
-== Run
+== How to build
+=== Prepare JARs
+Run command:
+[source,shell script]
+sbt stage
 
-Run class link:src/main/scala/com/stulsoft/poc/load/test2/Main.scala[Main]
+=== Build docker image
+Run command:
+[source,shell script]
+docker build --rm -t ysden123/load-test2 .
+
+== Where is a result
+A folder _target/universal/stage_ contains two sub-folders:
+
+- bin - scripts to run a _Main_ class
+- lib - all necessary JAR files
+
+== How to run
+Run command:
+[source,shell script]
+docker run --rm -i --network host ysden123/load-test2
+
+or
+[source,shell script]
+docker-compose up

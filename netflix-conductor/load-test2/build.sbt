@@ -47,3 +47,4 @@ lazy val root = (project in file("."))
   .settings(
     name := projectName
   )
+  .enablePlugins(JavaAppPackaging)
