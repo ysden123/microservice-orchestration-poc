@@ -1,7 +1,4 @@
-FROM openjdk:8-jre-alpine
-
-# Install bash
-RUN apk add --no-cache bash
+FROM openjdk:11-jre-slim
 
 ARG APP_NAME=load-test2
 
