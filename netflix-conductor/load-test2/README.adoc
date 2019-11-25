@@ -1,0 +1,7 @@
+= load-test2
+
+Load test.
+
+== Run
+
+Run class link:src/main/scala/com/stulsoft/poc/load/test2/Main.scala[Main]

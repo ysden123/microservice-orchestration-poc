@@ -5,11 +5,12 @@ lazy val scalaCheckVersion = "1.14.0"
 lazy val scalaLoggingVersion = "3.9.2"
 lazy val scalaMockVersion = "4.3.0"
 lazy val loggingVersion = "2.12.0"
+lazy val configVersion = "1.4.0"
 lazy val json4sVersion = "3.6.7"
 lazy val scalaXmlVersion = "1.2.0"
 lazy val projectVersion = "1.0.0"
 lazy val conductorClientVersion = "2.19.0"
-lazy val projectName = "load-test1"
+lazy val projectName = "load-test2"
 
 lazy val commonSettings = Seq(
   organization := "com.stulsoft",
@@ -22,6 +23,7 @@ lazy val commonSettings = Seq(
     "-language:implicitConversions",
     "-language:postfixOps"),
   libraryDependencies ++= Seq(
+    "com.typesafe" % "config" % configVersion,
     "com.netflix.conductor" % "conductor-client" % conductorClientVersion,
     "org.json4s" %% "json4s-native" % json4sVersion,
     "org.json4s" %% "json4s-jackson" % json4sVersion,

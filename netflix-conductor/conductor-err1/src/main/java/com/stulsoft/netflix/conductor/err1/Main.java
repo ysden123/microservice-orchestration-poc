@@ -129,7 +129,8 @@ public class Main {
             workflowClient.setRootURI(AppConfig.getInstance().rootURI());
             StartWorkflowRequest startWorkflowRequest = new StartWorkflowRequest();
             startWorkflowRequest.setName("Error_test_1_workflow");
-            startWorkflowRequest.setVersion(5);
+//            startWorkflowRequest.setVersion(5);
+            // Use last workflow definition
             Map<String, Object> inputData = new HashMap<>();
             inputData.put("sourceRequestId", 1);
             inputData.put("qcElementType", "test");
