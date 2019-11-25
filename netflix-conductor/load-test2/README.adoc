@@ -20,9 +20,32 @@ A folder _target/universal/stage_ contains two sub-folders:
 - lib - all necessary JAR files
 
 == How to run
+Default values:
+
+ - Conductor host: 0.0.0.0
+ - Conductor port: 8080
+ - Request number: 1500
+
+These values may be changed with system environment variables.
+For Linux:
+[source,shell script]
+export CUNDUCTOR_HOST="1.2.3.4"
+export CONDUCTOR_PORT=8081
+export REQUEST_NUMBER=15000
+
+For Windows
+[source,shell script]
+set CUNDUCTOR_HOST="1.2.3.4"
+set CONDUCTOR_PORT=8081
+set REQUEST_NUMBER=15000
+
 Run command:
 [source,shell script]
 docker run --rm -i --network host ysden123/load-test2
+
+or
+[source,shell script]
+docker run --rm -i --network host -e CUNDUCTOR_HOST="1.2.3.4" -e CONDUCTOR_PORT=8081 -e CONDUCTOR_PORT=8081 -e REQUEST_NUMBER=15000 ysden123/load-test2
 
 or
 [source,shell script]

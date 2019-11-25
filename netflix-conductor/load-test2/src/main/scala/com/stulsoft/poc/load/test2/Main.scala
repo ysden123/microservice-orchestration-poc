@@ -34,13 +34,15 @@ object Main extends App with StrictLogging {
     implicit val ec: scala.concurrent.ExecutionContext = scala.concurrent.ExecutionContext.global
     loadTaskAndWFDefinitions()
 
+    logger.info("Running requests...")
     val start = System.currentTimeMillis()
     val futures = ListBuffer[Future[Iterable[Long]]]()
-    val n = 1500
+    val n = AppConfig.requestNumber()
     val threadNumber = 3
     (1 to threadNumber).foreach(_ => futures += Future(runWorkFlows(n)))
 
     Await.result(Future.sequence(futures), Duration.Inf)
+    val end = System.currentTimeMillis()
     val times = for (
       result <- futures.toList.map(x => x.value);
       time <- result.get.get
@@ -56,8 +58,8 @@ object Main extends App with StrictLogging {
     val deviation = if (size > 0) 1.0 * times.map(t => Math.abs(t - mean)).sum * 100.0/ (mean *size) else 0.0
 
     logger.info(s"Number of requests: $size, number of threads: $threadNumber")
-    logger.info(s"Test duration: ${System.currentTimeMillis() - start} ms.")
-    logger.info(f"Mean = $mean%.3f ms/request, min =$min ms/request, max = $max ms/request, deviation = $deviation%.3f%%, speed = $speed%.3f requests/second")
+    logger.info(s"Test duration: ${end - start} ms.")
+    logger.info(f"Mean = $mean%.3f ms/request, min = $min ms/request, max = $max ms/request, deviation = $deviation%.3f%%, speed = $speed%.3f requests/second")
   }
 
   def loadTaskAndWFDefinitions(): Unit = {
