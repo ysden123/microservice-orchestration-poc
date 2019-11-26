@@ -2,7 +2,7 @@
  * Copyright (c) 2019. Yuriy Stul
  */
 
-package com.stulsoft.poc.load.test2
+package com.stulsoft.poc.conductor.worker
 
 import java.io.File
 
@@ -19,15 +19,7 @@ object AppConfig {
     s"""http://${config.getConfig("conductor").getString("host")}:${config.getConfig("conductor").getInt("port")}/api/"""
   }
 
-  def requestNumber(): Int = {
-    config.getConfig("test").getInt("n")
-  }
-
-  def repeatCount(): Int = {
-    config.getConfig("test").getInt("repeatCount")
-  }
-
-  def repeatDelay(): Long = {
-    config.getConfig("test").getLong("repeatDelay")
+  def threadCounter(): Int = {
+    config.getConfig("worker").getInt("threadCounter")
   }
 }

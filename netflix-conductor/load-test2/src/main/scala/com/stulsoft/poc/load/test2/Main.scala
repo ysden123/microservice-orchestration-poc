@@ -19,6 +19,7 @@ import scala.concurrent.{Await, Future}
 import scala.io.Source
 import scala.jdk.CollectionConverters._
 import scala.util.{Failure, Success}
+import scala.util.control.Breaks._
 
 /**
  * @author Yuriy Stul
@@ -122,19 +123,26 @@ object Main extends App with StrictLogging {
 
   def runWorkFlow(): Long = {
     val start = System.currentTimeMillis()
-    try {
-      val startWorkflowRequest = new StartWorkflowRequest()
-      startWorkflowRequest.setName("Load_test_1_workflow")
-      startWorkflowRequest.setVersion(1)
-      val inputData = new util.HashMap[String, Any]()
-      inputData.put("sourceRequestId", sourceRequestId.getAndIncrement())
-      inputData.put("qcElementType", "big")
-      startWorkflowRequest.getInput.put("eventData", inputData)
-      workflowClient.startWorkflow(startWorkflowRequest)
-    } catch {
-      case ex: Exception =>
-        logger.error(ex.getMessage, ex)
+    breakable {
+      for (_ <- 1 to AppConfig.repeatCount()) {
+        try {
+          val startWorkflowRequest = new StartWorkflowRequest()
+          startWorkflowRequest.setName("Load_test_1_workflow")
+          startWorkflowRequest.setVersion(1)
+          val inputData = new util.HashMap[String, Any]()
+          inputData.put("sourceRequestId", sourceRequestId.getAndIncrement())
+          inputData.put("qcElementType", "big")
+          startWorkflowRequest.getInput.put("eventData", inputData)
+          workflowClient.startWorkflow(startWorkflowRequest)
+          break
+        } catch {
+          case ex: Exception =>
+            logger.error(ex.getMessage)
+            Thread.sleep(AppConfig.repeatDelay())
+        }
+      }
     }
+
     System.currentTimeMillis() - start
   }
 
