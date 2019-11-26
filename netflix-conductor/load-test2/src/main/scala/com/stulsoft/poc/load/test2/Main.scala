@@ -18,6 +18,7 @@ import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 import scala.io.Source
 import scala.jdk.CollectionConverters._
+import scala.util.{Failure, Success}
 
 /**
  * @author Yuriy Stul
@@ -43,10 +44,14 @@ object Main extends App with StrictLogging {
 
     Await.result(Future.sequence(futures), Duration.Inf)
     val end = System.currentTimeMillis()
+
     val times = for (
-      result <- futures.toList.map(x => x.value);
-      time <- result.get.get
-    ) yield time
+      allFutures <- futures.flatMap(f => f.value);
+      successTimes <- allFutures match {
+        case Success(timeList) => timeList
+        case Failure(_) => List.empty
+      }
+    ) yield successTimes
 
     val total = times.sum
     val size = times.length
@@ -55,7 +60,7 @@ object Main extends App with StrictLogging {
     val speed = if (total > 0) 1000.0 * size / total else 0.0
     val min = times.min
     val max = times.max
-    val deviation = if (size > 0) 1.0 * times.map(t => Math.abs(t - mean)).sum * 100.0/ (mean *size) else 0.0
+    val deviation = if (size > 0) 1.0 * times.map(t => Math.abs(t - mean)).sum * 100.0 / (mean * size) else 0.0
 
     logger.info(s"Number of requests: $size, number of threads: $threadNumber")
     logger.info(s"Test duration: ${end - start} ms.")
