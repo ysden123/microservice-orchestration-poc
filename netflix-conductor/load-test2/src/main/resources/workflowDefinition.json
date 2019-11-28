@@ -1,7 +1,7 @@
 {
   "name": "Load_test_1_workflow",
   "description": "Load test workflow",
-  "version": 1,
+  "version": 2,
   "tasks": [
     {
       "name": "loadTest1Task",
@@ -12,19 +12,7 @@
       },
       "type": "SIMPLE",
       "startDelay": 0,
-      "optional": false,
-      "taskDefinition": {
-        "name": "load_test_task_1",
-        "description": "Load test task 1",
-        "retryCount": 3,
-        "timeoutSeconds": 0,
-        "timeoutPolicy": "TIME_OUT_WF",
-        "retryLogic": "FIXED",
-        "retryDelaySeconds": 60,
-        "responseTimeoutSeconds": 3600,
-        "rateLimitPerFrequency": 0,
-        "rateLimitFrequencyInSeconds": 1
-      }
+      "optional": false
     }
   ],
   "schemaVersion": 2,

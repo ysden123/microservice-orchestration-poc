@@ -29,6 +29,7 @@ object Main extends App with StrictLogging {
   val workflowClient = new WorkflowClient()
   workflowClient.setRootURI(AppConfig.rootUri())
   val workCounter = new AtomicInteger(0)
+  val errorCounter = new AtomicInteger(0)
 
   run()
 
@@ -65,7 +66,7 @@ object Main extends App with StrictLogging {
 
     logger.info(s"Number of requests: $size, number of threads: $threadNumber")
     logger.info(s"Test duration: ${end - start} ms.")
-    logger.info(f"Mean = $mean%.3f ms/request, min = $min ms/request, max = $max ms/request, deviation = $deviation%.3f%%, speed = $speed%.3f requests/second")
+    logger.info(f"Mean = $mean%.3f ms/request, min = $min ms/request, max = $max ms/request, deviation = $deviation%.3f%%, speed = $speed%.3f requests/second, number of errors = ${errorCounter.get()}")
   }
 
   def loadTaskAndWFDefinitions(): Unit = {
@@ -123,6 +124,7 @@ object Main extends App with StrictLogging {
 
   def runWorkFlow(): Long = {
     val start = System.currentTimeMillis()
+    var done = false
     breakable {
       for (_ <- 1 to AppConfig.repeatCount()) {
         try {
@@ -134,6 +136,7 @@ object Main extends App with StrictLogging {
           inputData.put("qcElementType", "big")
           startWorkflowRequest.getInput.put("eventData", inputData)
           workflowClient.startWorkflow(startWorkflowRequest)
+          done = true
           break
         } catch {
           case ex: Exception =>
@@ -142,6 +145,9 @@ object Main extends App with StrictLogging {
         }
       }
     }
+
+    if (!done)
+      errorCounter.incrementAndGet()
 
     System.currentTimeMillis() - start
   }
