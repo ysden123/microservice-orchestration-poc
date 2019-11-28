@@ -124,6 +124,7 @@ object Main extends App with StrictLogging {
 
   def runWorkFlow(): Long = {
     val start = System.currentTimeMillis()
+    var done = false
     breakable {
       for (_ <- 1 to AppConfig.repeatCount()) {
         try {
@@ -135,6 +136,7 @@ object Main extends App with StrictLogging {
           inputData.put("qcElementType", "big")
           startWorkflowRequest.getInput.put("eventData", inputData)
           workflowClient.startWorkflow(startWorkflowRequest)
+          done = true
           break
         } catch {
           case ex: Exception =>
@@ -143,6 +145,9 @@ object Main extends App with StrictLogging {
         }
       }
     }
+
+    if (!done)
+      errorCounter.incrementAndGet()
 
     System.currentTimeMillis() - start
   }
