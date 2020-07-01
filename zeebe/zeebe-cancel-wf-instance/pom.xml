@@ -26,7 +26,7 @@
         <zeebeClient.version>0.20.0</zeebeClient.version>
         <zeebeTest.version>0.20.0</zeebeTest.version>
 
-        <loging.version>2.12.0</loging.version>
+        <loging.version>2.13.3</loging.version>
 
         <junit.version>4.12</junit.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
